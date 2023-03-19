@@ -3,6 +3,9 @@ const { connect } = require("./src/config/connectDB");
 const { initKnowledgeRoutes } = require("./src/controller/knowledgeController");
 const cors = require("cors");
 var morgan = require("morgan");
+const { initMessageRoutes } = require("./src/controller/messageController");
+const MessageEntity = require("./src/entity/messageEntity");
+const { initAccountRoutes } = require("./src/controller/accountController");
 
 const port = 3001;
 
@@ -32,8 +35,8 @@ io.on("connection", (socket) => {
 
   io.emit("connected", socket.id);
 
-  socket.on("send", (e) => {
-    io.emit("sended", { mes: e.mes, user: e.user });
+  socket.on("send", async (e) => {
+    io.emit("sended", { content: e.content, user: e.user });
   });
 
   socket.on("ping", () => {
@@ -52,6 +55,8 @@ io.on("connection", (socket) => {
 app.use(express.json());
 
 initKnowledgeRoutes(app);
+initMessageRoutes(app);
+initAccountRoutes(app);
 
 server.listen(port, () => {
   console.log(`Server is on port ${port}`);

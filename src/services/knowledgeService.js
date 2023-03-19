@@ -8,7 +8,7 @@ const getAllKnowledge = async (req, res) => {
       data,
     });
   } catch {
-    return res.status(500).json({ data: "ERROR" });
+    return res.status(500).json("error");
   }
 };
 
@@ -22,7 +22,7 @@ const createNewKnowledge = async (req, res) => {
     newAcc.save();
     return res.status(200).json("success");
   } else {
-    return res.status(500).json({ data: "ERROR" });
+    return res.status(500).json("error");
   }
 };
 
@@ -35,7 +35,7 @@ const updateKnowledge = async (req, res) => {
     });
     return res.status(200).json("success");
   } else {
-    return res.status(500).json({ data: "ERROR" });
+    return res.status(500).json("error");
   }
 };
 
@@ -47,7 +47,7 @@ const deleteKnowledge = async (req, res) => {
       data,
     });
   } catch {
-    return res.status(500).json({ data: "ERROR" });
+    return res.status(500).json("error");
   }
 };
 
