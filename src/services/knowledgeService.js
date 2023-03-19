@@ -3,12 +3,12 @@ const Knowledge = require("../entity/knowledgeEntity");
 const getAllKnowledge = async (req, res) => {
   try {
     const data = await Knowledge.find({});
-    res.status(200).json({
+    return res.status(200).json({
       status: "success",
       data,
     });
   } catch {
-    res.status(500).json({ data: "ERROR" });
+    return res.status(500).json({ data: "ERROR" });
   }
 };
 
@@ -20,9 +20,9 @@ const createNewKnowledge = async (req, res) => {
       answer: answer,
     });
     newAcc.save();
-    res.status(200).json("success");
+    return res.status(200).json("success");
   } else {
-    res.status(500).json({ data: "ERROR" });
+    return res.status(500).json({ data: "ERROR" });
   }
 };
 
@@ -33,21 +33,21 @@ const updateKnowledge = async (req, res) => {
       knowledge_name,
       answer,
     });
-    res.status(200).json("success");
+    return res.status(200).json("success");
   } else {
-    res.status(500).json({ data: "ERROR" });
+    return res.status(500).json({ data: "ERROR" });
   }
 };
 
 const deleteKnowledge = async (req, res) => {
   try {
     const data = await Knowledge.deleteOne({ _id: req.params.id });
-    res.status(200).json({
+    return res.status(200).json({
       status: "success",
       data,
     });
   } catch {
-    res.status(500).json({ data: "ERROR" });
+    return res.status(500).json({ data: "ERROR" });
   }
 };
 

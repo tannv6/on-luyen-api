@@ -5,17 +5,18 @@
   "author": "Tan",
   "license": "MIT",
   "engines": {
-    "node": "14.20.1"
+    "node": "16.X"
   },
   "scripts": {
-    "dev": "nodemon node ./index.js",
-    "start": "node ./index.js"
+    "dev": "nodemon node index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "http": "^0.0.1-security",
     "mongoose": "^7.0.2",
+    "morgan": "^1.10.0",
     "socket.io": "^4.6.1"
   },
   "devDependencies": {

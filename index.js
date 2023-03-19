@@ -2,12 +2,15 @@ const express = require("express");
 const { connect } = require("./src/config/connectDB");
 const { initKnowledgeRoutes } = require("./src/controller/knowledgeController");
 const cors = require("cors");
+var morgan = require("morgan");
 
 const port = 3001;
 
 const app = express();
 
 connect();
+
+app.use(morgan("combined"));
 
 app.use(
   cors({
@@ -51,5 +54,5 @@ app.use(express.json());
 initKnowledgeRoutes(app);
 
 server.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+  console.log(`Server is on port ${port}`);
 });
