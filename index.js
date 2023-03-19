@@ -3,6 +3,8 @@ const { connect } = require("./src/config/connectDB");
 const { initKnowledgeRoutes } = require("./src/controller/knowledgeController");
 const cors = require("cors");
 
+const port = 3001;
+
 const app = express();
 
 connect();
@@ -13,8 +15,41 @@ app.use(
   })
 );
 
+var server = require("http").Server(app);
+
+var io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`socket ${socket.id} connected`);
+
+  io.emit("connected", socket.id);
+
+  socket.on("send", (e) => {
+    io.emit("sended", { mes: e.mes, user: e.user });
+  });
+
+  socket.on("ping", () => {
+    io.emit("pingC", "");
+  });
+
+  socket.on("pong", () => {
+    io.emit("pongC", "");
+  });
+
+  socket.on("disconnect", (reason) => {
+    console.log(`socket ${socket.id} disconnected due to ${reason}`);
+  });
+});
+
+app.use(express.json());
+
 initKnowledgeRoutes(app);
 
-app.listen(3001, function () {
-  console.log("Example app listening on port 3001!");
+server.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`);
 });
