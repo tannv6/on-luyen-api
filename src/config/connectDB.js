@@ -6,7 +6,12 @@ const db =
 
 const connect = async () => {
   try {
-    await mongoose.connect(db);
+    await mongoose.connect(db, {
+      connectTimeoutMS: 20000,
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true,
+    });
     console.log("Connect to DB successful");
   } catch {
     console.log("Fail to connect DB");
