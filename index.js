@@ -4,8 +4,8 @@ const { initKnowledgeRoutes } = require("./src/controller/knowledgeController");
 const cors = require("cors");
 var morgan = require("morgan");
 const { initMessageRoutes } = require("./src/controller/messageController");
-const MessageEntity = require("./src/entity/messageEntity");
 const { initAccountRoutes } = require("./src/controller/accountController");
+const { initLogRoutes } = require("./src/controller/logController");
 
 const port = 3001;
 
@@ -57,7 +57,7 @@ app.use(express.json());
 initKnowledgeRoutes(app);
 initMessageRoutes(app);
 initAccountRoutes(app);
-
+initLogRoutes(app);
 server.listen(port, () => {
   console.log(`Server is on port ${port}`);
 });
